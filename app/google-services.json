@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "850241675625",
+    "firebase_url": "https://sensordemoviemiento.firebaseio.com",
+    "project_id": "sensordemoviemiento",
+    "storage_bucket": "sensordemoviemiento.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:850241675625:android:9316ba03ee5aee1f731df8",
+        "android_client_info": {
+          "package_name": "com.example.sensordemovimiento"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "850241675625-nqp5b7dk3q6ik5ot9on8g6dgnvlvo2bk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sensordemovimiento",
+            "certificate_hash": "42dff4f7a1b25f3a7a13c6ac2f47a2b7f3cebebd"
+          }
+        },
+        {
+          "client_id": "850241675625-9h36qpd2f5r13vbbfuitb89b35b0eq7i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1H4FYoLIlIoAITvvNHPHFyTH8TwmvJVc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "850241675625-9h36qpd2f5r13vbbfuitb89b35b0eq7i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

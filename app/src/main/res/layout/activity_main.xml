@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <VideoView
+        android:id="@+id/videoView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="337dp"
+        android:layout_height="328dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="212dp"
+        android:contentDescription="AppLogo"
+        app:layout_constraintBottom_toBottomOf="@+id/videoView"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/logo" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="50dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        >
+        <EditText
+            android:id="@+id/txtUsuario"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="Usuario"
+            android:background="@drawable/edit_text_top"
+            android:padding="12dp" />
+
+        <EditText
+            android:id="@+id/txtPasswd"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="Clave"
+            android:background="@drawable/edit_text_bottom"
+            android:padding="12dp" />
+
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_horizontal"
+            android:onClick="login"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/button"
+            android:paddingLeft="15dip"
+            android:paddingRight="15dip"
+            android:text="Login"
+            android:textAllCaps="false"
+            android:textColor="#FE5274"
+            android:textSize="17sp"
+
+            />
+        <Button
+            android:id="@+id/btnRegistro"
+
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/button"
+            android:onClick="login"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:paddingLeft="15dip"
+            android:paddingRight="15dip"
+            android:text="Registrarse"
+
+
+            />
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
