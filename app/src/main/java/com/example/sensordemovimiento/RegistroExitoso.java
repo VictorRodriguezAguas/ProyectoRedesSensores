@@ -31,10 +31,10 @@ public class RegistroExitoso extends AppCompatActivity {
         //intanciando variables de tipo textview
         nTextViewNombre=(TextView)findViewById(R.id.textViewNombre);
         nTextViewEmail=(TextView)findViewById(R.id.textViewEmail);
-        mDatabase= FirebaseDatabase.getInstance().getReference();
+        //mDatabase= FirebaseDatabase.getInstance().getReference();
 
         //instanciando nAuth
-        nAuth=FirebaseAuth.getInstance();
+        //nAuth=FirebaseAuth.getInstance();
         //btnDatos=(Button)findViewById(R.id.btnEstadoTanque);
        /* btnDatos.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +55,7 @@ public class RegistroExitoso extends AppCompatActivity {
 
             }
         });
-        obtenerInformacion();
+        //obtenerInformacion();
     }
 
     private void obtenerInformacion(){
