@@ -42,56 +42,51 @@
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        >
+        app:layout_constraintRight_toRightOf="parent">
+
         <EditText
             android:id="@+id/txtUsuario"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:hint="Usuario"
             android:background="@drawable/edit_text_top"
-            android:padding="12dp" />
+            android:layout_margin="5dp"
+            android:padding="15dp" />
 
         <EditText
             android:id="@+id/txtPasswd"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:hint="Clave"
+            android:layout_margin="5dp"
             android:background="@drawable/edit_text_bottom"
-            android:padding="12dp" />
+            android:inputType="textPassword"
+            android:padding="15dp" />
 
         <Button
             android:id="@+id/btnLogin"
-            android:layout_width="150dp"
-            android:layout_height="30dp"
+            android:layout_width="180dp"
+            android:layout_height="40dp"
             android:layout_gravity="center_horizontal"
-            android:onClick="login"
             android:layout_marginTop="40dp"
             android:background="@drawable/button"
-            android:paddingLeft="15dip"
-            android:paddingRight="15dip"
-            android:text="Login"
+            android:text="Iniciar sesión"
             android:textAllCaps="false"
-            android:textColor="#FE5274"
-            android:textSize="17sp"
+            android:textColor="#F44336"
+            android:layout_marginBottom="10dp"
+            android:textSize="17sp" />
 
-            />
         <Button
             android:id="@+id/btnRegistro"
-
+            android:layout_width="180dp"
+            android:layout_height="40dp"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/button"
             android:onClick="login"
-            android:layout_width="150dp"
-            android:layout_height="30dp"
-            android:paddingLeft="15dip"
-            android:paddingRight="15dip"
+            android:textAllCaps="false"
             android:text="Registrarse"
-
-
-            />
+            android:textColor="#3F51B5"
+            android:textSize="17sp"/>
     </LinearLayout>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
