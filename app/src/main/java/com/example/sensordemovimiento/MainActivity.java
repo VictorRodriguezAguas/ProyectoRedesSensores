@@ -1,9 +1,9 @@
 package com.example.sensordemovimiento;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,22 +15,26 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.widget.VideoView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 
-public class MainActivity extends AppCompatActivity {
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class MainActivity extends AppCompatActivity{
+
+    String ip = "192.168.0.9";
+    int puerto = 8081;
+    private SharedPreferences sharedpreferences;
 
     EditText txtUsuario, txtPasswd;
     Button btnLogin, btnRegistro;
     ProgressBar progressBar;
-    //datos para iniciar sesion
-    String email;
-    String password;
-    //obtener informacion del usuario
-    FirebaseAuth nAuth;
+
     // atributos para el video
     private VideoView videoBG;
     MediaPlayer mMediaPlayer;
@@ -41,11 +45,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // configuracion
+        sharedpreferences = getSharedPreferences(Utils.MyPREFERENCES, this.MODE_PRIVATE);
+        ip = sharedpreferences.getString("ip", ip);
+        puerto = sharedpreferences.getInt("port", puerto);
+
         //Referencias a los controles
 
-        nAuth = FirebaseAuth.getInstance();
+
        //progressBar = findViewById(R.id.progressBar);
         //progressBar.setVisibility(View.INVISIBLE);
+        /*
         videoBG = (VideoView) findViewById(R.id.videoView);
         Uri uri = Uri.parse("android.resource://" // First start with this,
                 + getPackageName() // then retrieve your package name,
@@ -68,11 +79,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        if(nAuth.getCurrentUser()!=null){
-            startActivity(new Intent(MainActivity.this, RegistroExitoso.class));
-            finish();
+        */
 
-        }
         txtUsuario = (EditText) findViewById(R.id.txtUsuario);
         txtPasswd = (EditText) findViewById(R.id.txtPasswd);
         btnLogin = (Button) findViewById(R.id.btnLogin);
@@ -89,48 +97,93 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                // progressBar.setVisibility(View.VISIBLE);
-                String email = txtUsuario.getText().toString();
-                String password=txtPasswd.getText().toString();
+                String usuario = txtUsuario.getText().toString();
+                String contrasena = txtPasswd.getText().toString();
 
-                if(TextUtils.isEmpty(email)){
-                    txtUsuario.setError("SE REQUIERE CORREO ELECTRONICO");
+                if(TextUtils.isEmpty(usuario)){
+                    txtUsuario.setError("SE REQUIERE USUARIO");
                 }
-                if(TextUtils.isEmpty(password)){
+                if(TextUtils.isEmpty(contrasena)){
                     txtPasswd.setError("SE REQUIERE SU CONTRASEÑA");
                     return;
                 }
-                if(password.length()<6){
-                    txtPasswd.setError("Se necesita contraseña >= 6 caracteres");
+                if(contrasena.length()<8){
+                    txtPasswd.setError("Se necesita contraseña >= 8 caracteres");
                 }
+                api_login(usuario, contrasena);
+                /*
+                if(true){
+                    Toast.makeText(MainActivity.this,"INGRESO DE USUARIO EXITOSO",Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(MainActivity.this, RegistroExitoso.class));
 
-
-                //INICIO DE SESION CON FIREBASE
-                nAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            Toast.makeText(MainActivity.this,"INGRESO DE USUARIO EXITOSO",Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(MainActivity.this, RegistroExitoso.class));
-
-                        }else{
-                            Toast.makeText(MainActivity.this,"ERROR !"+ task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-
-                        }
-                    }
-                });
+                }else{
+                    Toast.makeText(MainActivity.this,"ERROR !",Toast.LENGTH_SHORT).show();
+                }*/
             }
         });
 
     }
+
+    /**
+     * Funcion consulta al api y devuelve el token del usuario
+     * @param usuario correo del usuario
+     * @param contrasena contraseña del usuario
+     */
+    public void api_login(String usuario, String contrasena){
+        JSONObject parameters = new JSONObject();
+        try {
+            parameters.put("username", usuario);
+            parameters.put("password", contrasena);
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            final String server = Utils.getServidor(ip, puerto);
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                    (Request.Method.POST,server + Utils.endPointLogin , parameters, new Response.Listener<JSONObject>() {
+
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                String token = response.getString(Utils.TOKEN);
+                                SharedPreferences.Editor editor = sharedpreferences.edit();
+                                editor.putString(Utils.TOKEN, token);
+                                editor.apply();
+                                Intent intent = new Intent(MainActivity.this, RegistroExitoso.class);
+                                startActivity(intent);
+                                finish();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                Toast.makeText(MainActivity.this, Utils.ERROR_LOGIN_RED, Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            try {
+                                int code = error.networkResponse.statusCode;
+                                JSONObject json = new JSONObject(new String(error.networkResponse.data));
+                                String message = "Error " + String.valueOf(code) + json.getString("message");
+                                Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
+                            }catch (Exception e) {
+                                e.printStackTrace();
+                                Toast.makeText(MainActivity.this, Utils.ERROR_LOGIN_RED_ACCESO, Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+            requestQueue.add(jsonObjectRequest);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     //metodo para evitar que le sesion se cierre al cerrar la aplicacion
     @Override
     protected void onStart() {
         super.onStart();
         //si el usuario ha iniciado sesion
-        FirebaseUser currentUser = nAuth.getCurrentUser();
-        if(currentUser!=null){
-            startActivity(new Intent(MainActivity.this, RegistroExitoso.class));
 
+        if(false){
+            startActivity(new Intent(MainActivity.this, RegistroExitoso.class));
         }
     }
 
@@ -138,22 +191,22 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         // Capture the current video position and pause the video.
-        mCurrentVideoPosition = mMediaPlayer.getCurrentPosition();
-        videoBG.pause();
+        //mCurrentVideoPosition = mMediaPlayer.getCurrentPosition();
+        //videoBG.pause();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         // Restart the video when resuming the Activity
-        videoBG.start();
+        //videoBG.start();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         // When the Activity is destroyed, release our MediaPlayer and set it to null.
-        mMediaPlayer.release();
-        mMediaPlayer = null;
+        //mMediaPlayer.release();
+        //mMediaPlayer = null;
     }
 }
