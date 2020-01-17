@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -102,13 +101,16 @@ public class MainActivity extends AppCompatActivity{
 
                 if(TextUtils.isEmpty(usuario)){
                     txtUsuario.setError("SE REQUIERE USUARIO");
+                    txtUsuario.setFocusable(true);
                 }
                 if(TextUtils.isEmpty(contrasena)){
                     txtPasswd.setError("SE REQUIERE SU CONTRASEÑA");
+                    txtPasswd.setFocusable(true);
                     return;
                 }
                 if(contrasena.length()<8){
                     txtPasswd.setError("Se necesita contraseña >= 8 caracteres");
+                    txtPasswd.setFocusable(true);
                 }
                 api_login(usuario, contrasena);
                 /*
