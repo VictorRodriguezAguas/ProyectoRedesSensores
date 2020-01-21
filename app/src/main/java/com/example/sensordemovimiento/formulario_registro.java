@@ -44,7 +44,7 @@ public class formulario_registro extends AppCompatActivity {
         //progressBar = findViewById(R.id.progressBar);
 
         if (nAuth.getCurrentUser() != null) {
-            startActivity(new Intent(formulario_registro.this, RegistroExitoso.class));
+            startActivity(new Intent(formulario_registro.this, Videoview.class));
             finish();
 
         }
@@ -104,7 +104,7 @@ public class formulario_registro extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Void> task2) {
                                     if (task2.isSuccessful()){
                                         Toast.makeText(formulario_registro.this,"INGRESO DE USUARIO EXITOSO",Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(formulario_registro.this, RegistroExitoso.class));
+                                        startActivity(new Intent(formulario_registro.this, Videoview.class));
 
                                     }else{
                                         Toast.makeText(formulario_registro.this,"ERROR !"+ task2.getException().getMessage(),Toast.LENGTH_SHORT).show();

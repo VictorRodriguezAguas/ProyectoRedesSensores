@@ -3,6 +3,7 @@ package com.example.sensordemovimiento;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,12 +12,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.VideoView;
 
+import com.example.sensordemovimiento.models.Nodo;
+import com.example.sensordemovimiento.models.Notificacion;
+
 public class Videoview extends AppCompatActivity {
 
-
     VideoView videoview;
-    //colocar el url
-    String videoUrl="";
+    String videoUrl="";             //colocar el url
     ProgressDialog pd;
     int current=0;
     int duration=0;
@@ -24,15 +26,27 @@ public class Videoview extends AppCompatActivity {
    // boolean isPlaying;
     //ProgressBar progressBar;
     //variables de las elementos de ventana
-   // ImageView imageView;
    // TextView textView1, textView2;
     Uri uri;
+    Notificacion notificacion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_videoview);
-       // imageView =(ImageView) fin
+
+        Intent intent = getIntent();
+        if (intent.getIntExtra("notificacionId", 0) != 0) {
+            notificacion = new Notificacion(intent.getIntExtra("notificacionId", 0),
+                    intent.getStringExtra("fecha"), intent.getIntExtra("region",0),
+                    intent.getStringExtra("urlVideo"),new Nodo(intent.getIntExtra("nodoId",0)));
+            videoUrl=notificacion.getUrlVideo();
+            //viewid_pedido.setText(viewid_pedido.getText() + String.valueOf(pedido.getCodigo()));
+            //view_direccion.setText(view_direccion.getText() + pedido.getDireccion());
+            // Obtengo del servidor el nombre del cliente y otros datos del pedido...
+            //obtener_info_pedido(codigo);
+        }
+
         //isPlaying=false;
         durationTimer=(TextView)findViewById(R.id.idDuration);
         videoview=(VideoView)findViewById(R.id.video);
@@ -61,9 +75,7 @@ public class Videoview extends AppCompatActivity {
                 String durating = String.format("%02d:%02d",duration/60,duration%60);
                 durationTimer.setText(durating);
                 pd.dismiss();
-
             }
         });
-
     }
 }
