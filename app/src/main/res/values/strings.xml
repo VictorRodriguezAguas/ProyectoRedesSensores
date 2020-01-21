@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Ssapp</string>
+    <string name="notificaciones">Total notificaciones:</string>
 </resources>
