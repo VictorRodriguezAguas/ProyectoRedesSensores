@@ -13,4 +13,9 @@ public class Utils {
     /* error RED */
     public static final String ERROR_LOGIN_RED = "Respuesta no procesable. Intente más tarde.";
     public static final String ERROR_LOGIN_RED_ACCESO = "Sin respuesta del servidor. Intente más tarde.";
+    //configuracion servidor
+    public static final String CONF_ACTUALIZADO = "IP y puerto actualizados exitosamente. ";
+    public static final String CONF_ERROR_1 = "IP y/o puerto del servidor no configurado. ";
+    public static final String CONF_ERROR_2 = "IP y/o puerto vacios.";
+
 }
