@@ -4,15 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
-import android.widget.VideoView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -32,13 +29,6 @@ public class MainActivity extends AppCompatActivity{
 
     EditText txtUsuario, txtPasswd;
     Button btnLogin, btnRegistro;
-    ProgressBar progressBar;
-
-    // atributos para el video
-    private VideoView videoBG;
-    MediaPlayer mMediaPlayer;
-    int mCurrentVideoPosition;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,37 +38,7 @@ public class MainActivity extends AppCompatActivity{
         // configuracion
         sharedpreferences = getSharedPreferences(Utils.MyPREFERENCES, this.MODE_PRIVATE);
         ip = sharedpreferences.getString("ip", ip);
-        puerto = sharedpreferences.getInt("port", puerto);
-
-        //Referencias a los controles
-
-
-       //progressBar = findViewById(R.id.progressBar);
-        //progressBar.setVisibility(View.INVISIBLE);
-        /*
-        videoBG = (VideoView) findViewById(R.id.videoView);
-        Uri uri = Uri.parse("android.resource://" // First start with this,
-                + getPackageName() // then retrieve your package name,
-                + "/" // add a slash,
-                + R.raw.smoke); // and then finally add your video resource. Make sure it is stored
-        // in the raw folder.
-        videoBG.setVideoURI(uri);
-        // Start the VideoView
-        videoBG.start();
-        videoBG.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mediaPlayer) {
-                mMediaPlayer = mediaPlayer;
-                // We want our video to play over and over so we set looping to true.
-                mMediaPlayer.setLooping(true);
-                // We then seek to the current posistion if it has been set and play the video.
-                if (mCurrentVideoPosition != 0) {
-                    mMediaPlayer.seekTo(mCurrentVideoPosition);
-                    mMediaPlayer.start();
-                }
-            }
-        });
-        */
+        puerto = sharedpreferences.getInt("puerto", puerto);
 
         txtUsuario = (EditText) findViewById(R.id.txtUsuario);
         txtPasswd = (EditText) findViewById(R.id.txtPasswd);
@@ -87,15 +47,16 @@ public class MainActivity extends AppCompatActivity{
         btnRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //progressBar.setVisibility(View.VISIBLE);
                 startActivity(new Intent(MainActivity.this, formulario_registro.class));
             }
         });
 
+        txtUsuario.setText("admin1");
+        txtPasswd.setText("adminadmin");
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // progressBar.setVisibility(View.VISIBLE);
                 String usuario = txtUsuario.getText().toString();
                 String contrasena = txtPasswd.getText().toString();
 
@@ -147,8 +108,10 @@ public class MainActivity extends AppCompatActivity{
                                 String token = response.getString(Utils.TOKEN);
                                 SharedPreferences.Editor editor = sharedpreferences.edit();
                                 editor.putString(Utils.TOKEN, token);
+                                editor.putString("ip", ip);
+                                editor.putInt("puerto", puerto);
                                 editor.apply();
-                                Intent intent = new Intent(MainActivity.this, RegistroExitoso.class);
+                                Intent intent = new Intent(MainActivity.this, Notificaciones.class);
                                 startActivity(intent);
                                 finish();
                             } catch (JSONException e) {
@@ -182,33 +145,22 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onStart() {
         super.onStart();
-        //si el usuario ha iniciado sesion
-
-        if(false){
-            startActivity(new Intent(MainActivity.this, RegistroExitoso.class));
-        }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         // Capture the current video position and pause the video.
-        //mCurrentVideoPosition = mMediaPlayer.getCurrentPosition();
-        //videoBG.pause();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         // Restart the video when resuming the Activity
-        //videoBG.start();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // When the Activity is destroyed, release our MediaPlayer and set it to null.
-        //mMediaPlayer.release();
-        //mMediaPlayer = null;
     }
 }
