@@ -4,12 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Videoview">
 
     <VideoView
+        android:id="@+id/video"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerInParent="true"
-        android:id="@+id/video"/>
+        android:layout_height="366dp" />
+
+    <TextView
+        android:id="@+id/idDuration"
+        android:layout_width="match_parent"
+        android:layout_height="428dp"
+        android:text="0:00">
+
+    </TextView>
 
 </RelativeLayout>
