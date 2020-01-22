@@ -1,5 +1,10 @@
 package com.example.sensordemovimiento;
 
+/**
+ * Esta clase contiene mensajes y constantes que son fijas y compartidas por varias activities.
+ * @author: Mauricio Leiton Lázaro(mdleiton)
+ * @version: 1.0
+ */
 public class Utils {
     public static final String MyPREFERENCES = "LoginRDS";
     public static final String TOKEN = "token";

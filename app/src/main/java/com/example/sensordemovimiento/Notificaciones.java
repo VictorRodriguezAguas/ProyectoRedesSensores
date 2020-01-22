@@ -43,6 +43,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Esta Activity se encarga de presenta una lista de notificaciones una vez que el usuario ha iniciado sesión
+ * @author: Mauricio Leiton Lázaro(mdleiton)
+ * @version: 1.0
+ */
 public class Notificaciones extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private ArrayList<Notificacion> notificaciones = new ArrayList<Notificacion>();
     private NotificacionAdapter notificacionAdapter;
@@ -133,12 +138,10 @@ public class Notificaciones extends AppCompatActivity implements AdapterView.OnI
         // TODO Auto-generated method stub
     }
 
+    /**
+     * función que se encargar de consultar la lista de notificaciones al api
+     */
     private void llenar() {
-        actualizarLista();
-    }
-
-
-    void actualizarLista() {
         try {
             ip = sharedPreferences.getString("ip", "");
             puerto = sharedPreferences.getInt("puerto", 0);
@@ -205,7 +208,7 @@ public class Notificaciones extends AppCompatActivity implements AdapterView.OnI
         }
     }
 
-    /*----------------------------- retroceder----------------------------------------*/
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -273,6 +276,9 @@ public class Notificaciones extends AppCompatActivity implements AdapterView.OnI
         return super.onCreateOptionsMenu(menu);
     }
 
+    /**
+     * Función que se llama cada x tiempo para verificar si existen nuevas notificaciones. Forma no eficiente de implementarlo. Pero funciona.
+     */
     public void obtenerNuevasNotificaciones() {
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         String ip = sharedPreferences.getString("ip", "");

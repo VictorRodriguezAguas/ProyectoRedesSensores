@@ -135,6 +135,9 @@ public class Videoview extends AppCompatActivity {
     }
 
 
+    /**
+     * función que obtiene información adicional al nodo donde se originó la alerta/notificación
+     */
     void actualizarInformacionNodo(){
         try {
             String ip = sharedPreferences.getString("ip","");
@@ -198,6 +201,10 @@ public class Videoview extends AppCompatActivity {
         }
     }
 
+    /**
+     * función que obtiene información de la ubicación especifica de un nodo
+     * @param location id de la ubicación registrada.
+     */
     void actualizarLocalizacion(int location){
         try {
             String ip = sharedPreferences.getString("ip","");
@@ -255,6 +262,10 @@ public class Videoview extends AppCompatActivity {
         }
     }
 
+    /**
+     * metodo que obtiene información del responsable asociado a ese nodo
+     * @param usuarios identificador del usuario
+     */
     void actualizarResponsable(int usuarios){
         try {
             String ip = sharedPreferences.getString("ip","");
@@ -310,5 +321,4 @@ public class Videoview extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
 }

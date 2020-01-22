@@ -1,16 +1,11 @@
 package com.example.sensordemovimiento;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,7 +23,7 @@ import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
-    String ip = "192.168.0.9";
+    String ip = "10.42.0.1";
     int puerto = 8081;
     private SharedPreferences sharedpreferences;
 
@@ -79,21 +74,13 @@ public class MainActivity extends AppCompatActivity {
                     txtPasswd.setFocusable(true);
                 }
                 api_login(usuario, contrasena);
-                /*
-                if(true){
-                    Toast.makeText(MainActivity.this,"INGRESO DE USUARIO EXITOSO",Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(MainActivity.this, RegistroExitoso.class));
-
-                }else{
-                    Toast.makeText(MainActivity.this,"ERROR !",Toast.LENGTH_SHORT).show();
-                }*/
             }
         });
 
     }
 
     /**
-     * Funcion consulta al api y devuelve el token del usuario
+     * Funcion para validar el inicio de sesión, espera a que se devuelva el token del usuario
      *
      * @param usuario    correo del usuario
      * @param contrasena contraseña del usuario
@@ -147,8 +134,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    //metodo para evitar que le sesion se cierre al cerrar la aplicacion
-    @Override
+    /**
+     * metodo para evitar que le sesion se cierre al cerrar la aplicacio
+     * */
+     @Override
     protected void onStart() {
         super.onStart();
     }

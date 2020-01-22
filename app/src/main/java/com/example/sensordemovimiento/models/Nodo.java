@@ -1,5 +1,10 @@
 package com.example.sensordemovimiento.models;
 
+/**
+ * Esta clase define a Nodo para encapsular la información del api.
+ * @author: Mauricio Leiton Lázaro(mdleiton)
+ * @version: 1.0
+ */
 public class Nodo {
     private int id;
     private double latitud;
