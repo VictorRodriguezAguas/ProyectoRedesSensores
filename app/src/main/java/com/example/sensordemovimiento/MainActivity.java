@@ -1,11 +1,16 @@
 package com.example.sensordemovimiento;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,7 +26,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
 
     String ip = "192.168.0.9";
     int puerto = 8081;
@@ -60,16 +65,16 @@ public class MainActivity extends AppCompatActivity{
                 String usuario = txtUsuario.getText().toString();
                 String contrasena = txtPasswd.getText().toString();
 
-                if(TextUtils.isEmpty(usuario)){
+                if (TextUtils.isEmpty(usuario)) {
                     txtUsuario.setError("SE REQUIERE USUARIO");
                     txtUsuario.setFocusable(true);
                 }
-                if(TextUtils.isEmpty(contrasena)){
+                if (TextUtils.isEmpty(contrasena)) {
                     txtPasswd.setError("SE REQUIERE SU CONTRASEÑA");
                     txtPasswd.setFocusable(true);
                     return;
                 }
-                if(contrasena.length()<8){
+                if (contrasena.length() < 8) {
                     txtPasswd.setError("Se necesita contraseña >= 8 caracteres");
                     txtPasswd.setFocusable(true);
                 }
@@ -89,10 +94,11 @@ public class MainActivity extends AppCompatActivity{
 
     /**
      * Funcion consulta al api y devuelve el token del usuario
-     * @param usuario correo del usuario
+     *
+     * @param usuario    correo del usuario
      * @param contrasena contraseña del usuario
      */
-    public void api_login(String usuario, String contrasena){
+    public void api_login(String usuario, String contrasena) {
         JSONObject parameters = new JSONObject();
         try {
             parameters.put("username", usuario);
@@ -100,7 +106,7 @@ public class MainActivity extends AppCompatActivity{
             RequestQueue requestQueue = Volley.newRequestQueue(this);
             final String server = Utils.getServidor(ip, puerto);
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                    (Request.Method.POST,server + Utils.endPointLogin , parameters, new Response.Listener<JSONObject>() {
+                    (Request.Method.POST, server + Utils.endPointLogin, parameters, new Response.Listener<JSONObject>() {
 
                         @Override
                         public void onResponse(JSONObject response) {
@@ -128,7 +134,7 @@ public class MainActivity extends AppCompatActivity{
                                 JSONObject json = new JSONObject(new String(error.networkResponse.data));
                                 String message = "Error " + String.valueOf(code) + json.getString("message");
                                 Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
-                            }catch (Exception e) {
+                            } catch (Exception e) {
                                 e.printStackTrace();
                                 Toast.makeText(MainActivity.this, Utils.ERROR_LOGIN_RED_ACCESO, Toast.LENGTH_SHORT).show();
                             }
@@ -163,4 +169,5 @@ public class MainActivity extends AppCompatActivity{
     protected void onDestroy() {
         super.onDestroy();
     }
+
 }
