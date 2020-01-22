@@ -40,8 +40,4 @@
         android:textColor="@color/texto_sin_opac"
         android:textSize="15sp"
         android:padding="5dp"/>
-
-
-
-
 </LinearLayout>

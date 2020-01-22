@@ -7,17 +7,79 @@
     android:orientation="vertical"
     tools:context=".Videoview">
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="35dp">
+
+        <TextView
+            android:id="@+id/editId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#45547e1a"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:padding="5dp"
+            android:text="Región - Id:"
+            android:textColor="@color/texto_sin_opac"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/editFecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#45547e1a"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:padding="5dp"
+            android:text="Fecha:"
+            android:textColor="@color/texto_sin_opac"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/editNodo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#45547e1a"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:padding="5dp"
+            android:text="Nodo:"
+            android:textColor="@color/texto_sin_opac"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/editUbicacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#45547e1a"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:padding="5dp"
+            android:text="Ubicación:"
+            android:textColor="@color/texto_sin_opac"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/editresponsable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#45547e1a"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:padding="5dp"
+            android:text="Responsable:"
+            android:textColor="@color/texto_sin_opac"
+            android:textSize="15sp" />
+    </LinearLayout>
+
     <VideoView
         android:id="@+id/video"
         android:layout_width="match_parent"
-        android:layout_height="366dp" />
-
-    <TextView
-        android:id="@+id/idDuration"
-        android:layout_width="match_parent"
-        android:layout_height="428dp"
-        android:text="0:00">
-
-    </TextView>
+        android:layout_height="400dp"
+        android:layout_marginTop="200dp"
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>
