@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/bg">
+    android:layout_height="match_parent">
 
 
     <LinearLayout
@@ -14,22 +13,22 @@
         android:gravity="center"
         android:layout_alignParentTop="true"
         android:layout_above="@id/input_group">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
-            android:text="SIGN UP"
-            android:textColor="#FFFFFF"
+            android:text="Registro"
+            android:textColor="@color/texto_sin_opac"
             android:textSize="20sp"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
-            android:text="SENSOR DE MOVIMIENTO"
-            android:textColor="#FFFFFF"
+            android:text="SAAPP"
+            android:textColor="@color/texto_sin_opac"
             android:textSize="16sp"/>
-
-
     </LinearLayout>
 
 
@@ -75,8 +74,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_text_bottom"
-            android:hint="Password"
+            android:hint="Contraseña"
             android:inputType="textPassword"
+            android:layout_marginBottom="20dp"
             android:padding="15dp"/>
 
 
@@ -87,23 +87,10 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/button"
             android:foreground="?android:attr/selectableItemBackground"
-            android:text="SIGN UP"
+            android:text="Registrarme"
             android:textAllCaps="false"
-            android:textColor="#FE5274"
+            android:textColor="@color/texto_sin_opac"
             android:textSize="17sp"/>
-
-        <TextView
-            android:id="@+id/signIn_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:padding="10dp"
-            android:text="Already Have an Account?  Sign in"
-            android:textAllCaps="true"
-            android:textSize="13dp"
-            android:textStyle="bold"
-            android:textColor="#FAD0E1"
-            android:fontFamily="sans-serif"/>
 
     </LinearLayout>
 
