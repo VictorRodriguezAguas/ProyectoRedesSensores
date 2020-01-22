@@ -167,4 +167,12 @@ public class Notificaciones extends AppCompatActivity implements AdapterView.OnI
             e.printStackTrace();
         }
     }
+
+    /*----------------------------- retroceder----------------------------------------*/
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
+    }
 }
